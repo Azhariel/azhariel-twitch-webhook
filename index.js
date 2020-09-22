@@ -1,12 +1,14 @@
-// Require express and body-parser
+// Require express and dotenv
 const express = require("express")
 const dotenv = require('dotenv').config()
 
-// Initialize express and define a port
+// ? Não sei por quê o dotenv tá passando o .env só para .parsed ao invés de .process que nem na documentação, mas isso deve resolver?
+dotenv.process = dotenv.parsed;
+
+// Initialize express
 const app = express()
 
-// Tell express to use body-parser's JSON parsing
-// app.use(bodyParser.json())
+// Tell express to use JSON parsing
 app.use(express.json())
 
 // Tell express to use queryString parser
@@ -31,7 +33,7 @@ app.get("/", (req, res) => {
 })
 
 
-// Start express on the defined port
-app.listen(dotenv.parsed.PORT, () => console.log(`Server running on port ${dotenv.parsed.PORT}`))
+// Inicia express na porta do .env ou na porta 41010
+app.listen(dotenv.process.PORT || 41010, () => console.log(`Servidor iniciado`))
 
 

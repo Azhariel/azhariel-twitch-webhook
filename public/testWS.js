@@ -1,4 +1,4 @@
-const client = new WebSocket('ws://192.168.0.101:41010'); //! Mudar para o endereço final 
+const client = new WebSocket('ws://azhariel-twitch-webhook.herokuapp.com'); //! Mudar para o endereço final 
 
 
 client.onopen = (event) => {

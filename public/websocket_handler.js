@@ -1,4 +1,4 @@
-const ws_url = 'ws://192.168.0.101:41010' // ! wss://azhariel-twitch-webhook.herokuapp.com/
+const ws_url = 'wss://azhariel-twitch-webhook.herokuapp.com/' // ! 'ws://192.168.0.101:41010' // !
 let client = null;
 
 

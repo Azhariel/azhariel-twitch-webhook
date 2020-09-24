@@ -29,7 +29,7 @@ let followTo;
 // * Quando um cliente conecta, cria um socket:
 wsServer.on('connection', socket => {
 
-/* 
+/* // * Referência 
   // // Envia para o cliente conectado:
   // socket.send('Você está conectado via websocket!');
 
@@ -45,8 +45,16 @@ wsServer.on('connection', socket => {
 
   // Quando recebe uma mensagem de (qualquer) cliente, loga:
   socket.on('message', message => console.log(message));
+  
+  // Ao receber a mensagem ping, envia a mensagem pong para o cliente que enviou
+  socket.on('message', message => {
+    if (message === 'ping'){
+      socket.send('pong');
+    }
+  });
 
   // * Listeners de Eventos Emitidos *
+  // * Ao referenciar socket no contexto de eventos, trata-se de todos sockets conectados *
   // Quando ocorre o gatilho websock, envia (para todos):
   event.on('websock', () => {
     socket.send('Alguém acessou /websocket');
@@ -54,7 +62,7 @@ wsServer.on('connection', socket => {
 
   // Quando ocorre o gatilho followEvent, envia (para todos):
   event.on('followEvent', () => {
-    socket.send(`${followFrom} acabou de seguir ${followTo}`)
+    socket.send(`-= ${followFrom} acabou de seguir ${followTo} =-`)
   })
 });
 

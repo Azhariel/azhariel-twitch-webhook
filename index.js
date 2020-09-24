@@ -109,6 +109,7 @@ app.get("/hooks", (req, res) => {
 app.get("/websocket", (req, res) => {
   // Ativa o gatilho websock
   event.emit('websock');
+  res.status(200).end();
 });
 
 // * GET em /

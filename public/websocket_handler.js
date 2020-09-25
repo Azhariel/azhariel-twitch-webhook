@@ -1,6 +1,6 @@
-const ws_url = 'wss://azhariel-twitch-webhook.herokuapp.com/' // ! 'ws://192.168.0.101:41010' // !
+const ws_url = 'wss://azhariel-twitch-webhook.herokuapp.com/' // ! local: 'ws://192.168.0.101:41010 ' 
 let client = null;
-
+let follower;
 
 // * Função para conectar ao websocket
 function connect_socket() {
@@ -9,10 +9,10 @@ function connect_socket() {
         connect_socket();
     }; // Ao fechar a conexão, executa a mesma função para abrir nova conexão
     client.onopen = (aberto) => {
+        // Executa ping pela primeira vez
         client.send("cliente aberto");
         ping();
     }
-     // Executa ping pela primeira vez
 }
 
 // * Função para enviar ping ao servidor a cada 20s
@@ -27,10 +27,15 @@ function ping() {
 connect_socket();
 
 
-// Manipula as mensagens enviadas pelo servidor
-client.onmessage = function (event) {
-    console.log(event);
+// * Manipula as mensagens enviadas pelo servidor
+client.onmessage = function(event) {
     var message = event.data;
-    var messagesList = document.getElementById('messages');
-    messagesList.innerHTML += '<li class="received">' + message + '</li>';
+    // Ignorar pongs enviados para manter a conexão ativa
+    if (message != 'pong') {
+        follower = JSON.parse(message);
+        console.log(follower);
+        document.getElementById('glitch').innerHTML = `<b>${follower.data[0]["from_name"]}</b>`;
+        document.getElementById('glitch').setAttribute('data-text', follower.data[0]["from_name"]);
+
+    }
 };

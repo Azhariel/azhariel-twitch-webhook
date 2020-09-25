@@ -40,6 +40,7 @@ Os principais arquivos "do lado do cliente" estão dentro da pasta `Public` e s�
 - - [ ] *Raid*
 - [ ] Implementar animação de *fade in* e *fade out* nos alertas
 - [ ] Implementar um *timer* para que, caso dois eventos aconteçam em seguida, um não se sobreponha ao outro.
+- [ ] Implementar resposta a `!comandos`.
 
 # Implementação
 Este repositório está sincronizado e pode ser visualizado rodando no [Heroku](https://azhariel-twitch-webhook.herokuapp.com/). Infelizmente, dada a natureza do projeto e a autenticação não estar implementada no servidor, o projeto não responde aos alertas. Ainda assim, pode ser testado utilizando qualquer ferramenta que permita enviar POST/GET. 
